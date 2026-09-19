@@ -1,0 +1,60 @@
+# Environment variables and secrets
+
+.env
+.env.*
+!.env.example
+
+# Python virtual environment
+
+.venv/
+venv/
+ENV/
+env/
+
+# Python cache
+
+**pycache**/
+*.py[cod]
+*$py.class
+
+# Uploaded contract files
+
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# ChromaDB / local vector database
+
+chroma_db/
+.chroma/
+
+# IDE / editor files
+
+.vscode/
+.idea/
+
+# OS files
+
+.DS_Store
+Thumbs.db
+
+# Logs
+
+*.log
+
+# Build / temporary files
+
+dist/
+build/
+*.tmp
+*.temp
+
+# Python test/cache files
+
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Node files if added later
+
+node_modules/
+npm-debug.log*
