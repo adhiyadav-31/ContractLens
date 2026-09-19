@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ContractLens</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== Header ===== -->
+  <header class="site-header">
+    <div class="wordmark">ContractLens</div>
+    <form id="upload-form" class="upload-form">
+      <label class="upload-btn" for="file-input">
+        Upload contract
+        <input type="file" id="file-input" accept="application/pdf" hidden />
+      </label>
+      <span id="upload-status" class="upload-status"></span>
+    </form>
+  </header>
+
+  <!-- ===== Stats strip ===== -->
+  <section class="stats-strip" aria-label="Overview stats">
+    <div class="stat">
+      <span class="stat-value" id="stat-contracts">0</span>
+      <span class="stat-label">Contracts tracked</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value" id="stat-upcoming">0</span>
+      <span class="stat-label">Upcoming obligations</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value stat-value--overdue" id="stat-overdue">0</span>
+      <span class="stat-label">Overdue</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value" id="stat-flags">0</span>
+      <span class="stat-label">Flagged for review</span>
+    </div>
+  </section>
+
+  <!-- ===== Main: contract list + detail panel ===== -->
+  <main class="main-grid">
+
+    <!-- Left: contract register -->
+    <section class="contract-list-panel" aria-label="Contracts">
+      <h2 class="panel-heading">Contracts</h2>
+      <ul id="contract-list" class="contract-list">
+        <!-- rows injected by script.js -->
+        <li class="contract-list__empty">No contracts uploaded yet.</li>
+      </ul>
+    </section>
+
+    <!-- Right: selected contract detail -->
+    <section class="detail-panel" aria-label="Contract detail">
+
+      <div id="detail-empty" class="detail-empty">
+        Select a contract, or upload one, to see its details here.
+      </div>
+
+      <div id="detail-content" class="detail-content" hidden>
+
+        <!-- Overview -->
+        <div class="detail-block" id="block-overview">
+          <h2 class="detail-title" id="detail-filename">—</h2>
+          <dl class="overview-grid">
+            <div><dt>Parties</dt><dd id="ov-parties">—</dd></div>
+            <div><dt>Effective</dt><dd id="ov-effective">—</dd></div>
+            <div><dt>Expires</dt><dd id="ov-expires">—</dd></div>
+            <div><dt>Renewal</dt><dd id="ov-renewal">—</dd></div>
+            <div><dt>Payment terms</dt><dd id="ov-payment">—</dd></div>
+          </dl>
+        </div>
+
+        <!-- Obligations & Timeline -->
+        <div class="detail-block" id="block-obligations">
+          <h3 class="section-heading">Obligations &amp; timeline</h3>
+          <ul id="obligation-list" class="obligation-list"></ul>
+        </div>
+
+        <!-- Review flags -->
+        <div class="detail-block" id="block-flags">
+          <h3 class="section-heading">Review flags</h3>
+          <p class="disclaimer">Flagged items may require human review — this is not legal advice.</p>
+          <ul id="flag-list" class="flag-list"></ul>
+        </div>
+
+        <!-- Chat / Q&A -->
+        <div class="detail-block" id="block-chat">
+          <h3 class="section-heading">Ask about this contract</h3>
+          <form id="chat-form" class="chat-form">
+            <input type="text" id="chat-input" placeholder="e.g. When is payment due?" autocomplete="off" />
+            <button type="submit">Ask</button>
+          </form>
+          <div id="chat-log" class="chat-log"></div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Comparison ===== -->
+  <section class="compare-section" aria-label="Compare versions">
+    <h2 class="panel-heading">Compare versions</h2>
+    <form id="compare-form" class="compare-form">
+      <select id="compare-v1"><option value="">Version 1…</option></select>
+      <span class="compare-arrow">vs</span>
+      <select id="compare-v2"><option value="">Version 2…</option></select>
+      <button type="submit">Compare</button>
+    </form>
+    <div id="compare-results" class="compare-results"></div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>

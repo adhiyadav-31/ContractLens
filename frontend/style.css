@@ -1,0 +1,305 @@
+/* ===== Tokens ===== */
+:root {
+  --ink: #1B1F2A;
+  --paper: #F7F5F0;
+  --rule: #D8D3C7;
+  --seal: #A8763A;
+  --overdue: #A23E3E;
+  --upcoming: #3E7068;
+  --card: #FFFFFF;
+  --text-muted: #6B6455;
+  --serif: "Source Serif 4", Georgia, serif;
+  --sans: "Inter", -apple-system, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* ===== Header ===== */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 32px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.wordmark {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+}
+
+.upload-form { display: flex; align-items: center; gap: 12px; }
+
+.upload-btn {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 14px;
+  padding: 9px 18px;
+  border: 1px solid var(--ink);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.upload-btn:hover { background: var(--ink); color: var(--paper); }
+
+.upload-status { font-size: 13px; color: var(--text-muted); }
+
+/* ===== Stats strip ===== */
+.stats-strip {
+  display: flex;
+  gap: 48px;
+  padding: 24px 32px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.stat { display: flex; flex-direction: column; }
+
+.stat-value {
+  font-family: var(--serif);
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.1;
+}
+.stat-value--overdue { color: var(--overdue); }
+
+.stat-label {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* ===== Main grid ===== */
+.main-grid {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  min-height: 60vh;
+}
+
+.panel-heading {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 600;
+  margin: 0 0 14px;
+}
+
+/* Contract list */
+.contract-list-panel {
+  padding: 28px 24px;
+  border-right: 1px solid var(--rule);
+}
+
+.contract-list { list-style: none; margin: 0; padding: 0; }
+
+.contract-list__empty {
+  color: var(--text-muted);
+  font-size: 13.5px;
+  padding: 10px 0;
+}
+
+.contract-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 12px 4px;
+  border-bottom: 1px solid var(--rule);
+  cursor: pointer;
+}
+.contract-row:hover { background: rgba(27, 31, 42, 0.03); }
+.contract-row.is-selected { border-left: 3px solid var(--seal); padding-left: 8px; }
+
+.contract-row__name { font-size: 14px; font-weight: 500; }
+.contract-row__meta { font-size: 12px; color: var(--text-muted); }
+
+/* Detail panel */
+.detail-panel { padding: 28px 32px; }
+
+.detail-empty {
+  color: var(--text-muted);
+  font-size: 14px;
+  padding: 40px 0;
+}
+
+.detail-title {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0 0 20px;
+}
+
+.detail-block {
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--rule);
+}
+.detail-block:last-child { border-bottom: none; }
+
+.section-heading {
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 12px;
+}
+
+.disclaimer {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  font-style: italic;
+  margin: 0 0 14px;
+}
+
+/* Overview definition list */
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px 32px;
+  margin: 0;
+}
+.overview-grid dt {
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  margin-bottom: 3px;
+}
+.overview-grid dd { margin: 0; font-size: 14.5px; }
+
+/* Obligations list */
+.obligation-list { list-style: none; margin: 0; padding: 0; }
+
+.obligation-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--rule);
+  position: relative;
+  padding-left: 16px;
+}
+.obligation-row:last-child { border-bottom: none; }
+
+.obligation-row::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 14px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+.obligation-row[data-status="OVERDUE"]::before { background: var(--overdue); }
+.obligation-row[data-status="DUE_SOON"]::before { background: var(--seal); }
+.obligation-row[data-status="UPCOMING"]::before { background: var(--upcoming); }
+
+.obligation-row__action { font-size: 14px; font-weight: 500; }
+.obligation-row__meta { font-size: 12.5px; color: var(--text-muted); }
+
+/* Review flags */
+.flag-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+
+.flag-row {
+  border-left: 3px solid var(--seal);
+  background: rgba(168, 118, 58, 0.06);
+  padding: 10px 14px;
+  border-radius: 0 3px 3px 0;
+}
+
+.flag-row__type {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--seal);
+}
+.flag-row__desc { font-size: 13.5px; margin-top: 4px; }
+.flag-row__source { font-size: 11.5px; color: var(--text-muted); margin-top: 4px; }
+
+/* Chat */
+.chat-form { display: flex; gap: 8px; margin-bottom: 14px; }
+.chat-form input {
+  flex: 1;
+  padding: 9px 12px;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  font-family: var(--sans);
+  font-size: 14px;
+}
+.chat-form button {
+  padding: 9px 18px;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 3px;
+  font-family: var(--sans);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.chat-log { display: flex; flex-direction: column; gap: 14px; }
+
+.chat-qa .q { font-weight: 500; font-size: 14px; }
+.chat-qa .a { font-size: 14px; margin-top: 4px; }
+.chat-qa .sources { font-size: 12px; color: var(--text-muted); margin-top: 6px; }
+
+/* Comparison */
+.compare-section {
+  padding: 28px 32px;
+  border-top: 1px solid var(--rule);
+}
+
+.compare-form {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.compare-form select {
+  padding: 8px 10px;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  font-family: var(--sans);
+  font-size: 14px;
+}
+.compare-arrow { font-size: 13px; color: var(--text-muted); }
+.compare-form button {
+  padding: 8px 18px;
+  border: 1px solid var(--ink);
+  background: transparent;
+  border-radius: 3px;
+  font-family: var(--sans);
+  font-weight: 500;
+  cursor: pointer;
+}
+.compare-form button:hover { background: var(--ink); color: var(--paper); }
+
+.compare-results { display: flex; flex-direction: column; gap: 12px; }
+
+.change-row {
+  display: grid;
+  grid-template-columns: 140px 1fr 1fr;
+  gap: 16px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 13.5px;
+}
+.change-row__category { font-weight: 600; text-transform: capitalize; }
+.change-row__old { color: var(--overdue); text-decoration: line-through; }
+.change-row__new { color: var(--upcoming); }
+
+/* ===== Responsive ===== */
+@media (max-width: 720px) {
+  .main-grid { grid-template-columns: 1fr; }
+  .contract-list-panel { border-right: none; border-bottom: 1px solid var(--rule); }
+  .stats-strip { flex-wrap: wrap; gap: 24px; }
+  .change-row { grid-template-columns: 1fr; gap: 4px; }
+}
